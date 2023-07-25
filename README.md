@@ -1,2 +1,2 @@
 # ProcessingArduino
- Various eperiments connecting Processing to Arduino
+ Various experiments connecting Processing to Arduino.
