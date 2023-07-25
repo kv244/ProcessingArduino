@@ -15,6 +15,7 @@ void setup(){
   println("Serial ports:");
   println((Object[])Serial.list());
   arduinoPort = new Serial(this, "COM3", 9600); 
+  arduinoPort.bufferUntil(10); // buff end marker, has to match in Arduino sketch
 }
 
 void keyPressed(){
@@ -25,7 +26,7 @@ void keyPressed(){
   else
     keyRead = (char)key;
     
-  println("Writing ", keyRead);
+  // println("Writing ", keyRead);
   arduinoPort.write(keyRead);
 }
 
@@ -33,5 +34,8 @@ void draw(){
 }
 
 void serialEvent(Serial p){
-  println("Serial event %s", p.toString());
+  String arduinoCmd = p.readString();
+  println("Serial event", arduinoCmd.substring(0, 5));
+  if(arduinoCmd.substring(0, 5).equals("RECVD")) // have to handle the newline needed to signal buff end
+    exit();
 }

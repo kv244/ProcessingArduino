@@ -63,6 +63,7 @@ void loop() {
     lcd.clear();
     lcd.setCursor(0, 0);
     portState = RECEIVED;
+    Serial.write("RECVD\n"); // trying to see if it can be bidirectionsl
   }
   if(portState == RECEIVED)
     lcd.print(displayMsg.toDisplay);
